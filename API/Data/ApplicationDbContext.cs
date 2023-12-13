@@ -7,7 +7,7 @@ namespace API.Data
   {
     public ApplicationDbContext(DbContextOptions options) : base(options) { }
 
-    public DbSet<BlogPost> BlogPosts { get; set; }
-    public DbSet<Category> Categories { get; set; }
+    public virtual DbSet<BlogPost> BlogPosts { get; set; }
+    public virtual DbSet<Category> Categories { get; set; }
   }
 }
