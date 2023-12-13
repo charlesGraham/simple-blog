@@ -11,10 +11,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // add DbContext
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-{
-  options.UseNpgsql(builder.Configuration.GetConnectionString("SimpleBlogConnectionString"));
-});
+builder.Services.AddEntityFrameworkNpgsql()
+  .AddDbContext<ApplicationDbContext>(options =>
+  {
+    options.UseNpgsql(builder.Configuration.GetConnectionString("SimpleBlogConnectionString"));
+  });
+
+
+// builder.Services.AddDbContext<ApplicationDbContext>(options =>
+// {
+//   options.UseNpgsql(builder.Configuration.GetConnectionString("SimpleBlogConnectionString"));
+// });
+
+
 
 var app = builder.Build();
 
