@@ -23,8 +23,7 @@ export class AddCategoryComponent {
       .subscribe({
         next: (response) => {
           console.log('Success!');
-        },
-        error: (error) => { }
+        }
       })
   }
 
