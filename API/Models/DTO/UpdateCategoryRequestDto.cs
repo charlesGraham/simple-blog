@@ -1,10 +1,8 @@
-namespace API.Models.Domain
+namespace API.Models.DTO
 {
-  public class Category
+  public class UpdateCategoryRequestDto
   {
-    public Guid Id { get; set; }
     public string? Name { get; set; } = string.Empty;
     public string? UrlHandle { get; set; } = string.Empty;
-
   }
 }

@@ -1,5 +1,6 @@
 using API.Models.Domain;
 using API.Models.DTO;
+using API.Repositories.Implementation;
 using API.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,7 +24,7 @@ namespace API.Controllers
       var category = new Category
       {
         Name = request.Name,
-        Urlhandle = request.Urlhandle
+        UrlHandle = request.UrlHandle
       };
 
       await _categoryRepository.CreateAsync(category);
@@ -33,7 +34,7 @@ namespace API.Controllers
       {
         Id = category.Id,
         Name = category.Name,
-        UrlHandle = category.Urlhandle
+        UrlHandle = category.UrlHandle
       };
 
       return Ok(response);
@@ -54,7 +55,7 @@ namespace API.Controllers
         {
           Id = category.Id,
           Name = category.Name,
-          UrlHandle = category.Urlhandle
+          UrlHandle = category.UrlHandle
         });
       }
 
@@ -78,7 +79,37 @@ namespace API.Controllers
       {
         Id = existingCategory.Id,
         Name = existingCategory.Name,
-        UrlHandle = existingCategory.Urlhandle
+        UrlHandle = existingCategory.UrlHandle
+      };
+
+      return Ok(response);
+    }
+
+    [HttpPut]
+    [Route("{id:Guid}")]
+    public async Task<IActionResult> UpdateCategory(Guid id, UpdateCategoryRequestDto request)
+    {
+      // DTO to domain model
+      var category = new Category
+      {
+        Id = id,
+        Name = request.Name,
+        UrlHandle = request.UrlHandle
+      };
+
+      category = await _categoryRepository.UpdateAsync(category);
+
+      if (category == null)
+      {
+        return NotFound();
+      }
+
+      // domain model to DTO
+      var response = new CategoryDto
+      {
+        Id = category.Id,
+        Name = category.Name,
+        UrlHandle = category.UrlHandle
       };
 
       return Ok(response);

@@ -11,72 +11,72 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace API.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231214152257_InitialMigration")]
-    partial class InitialMigration
+  [DbContext(typeof(ApplicationDbContext))]
+  [Migration("20231214152257_InitialMigration")]
+  partial class InitialMigration
+  {
+    /// <inheritdoc />
+    protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "8.0.0")
+          .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+      SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("API.Models.Domain.BlogPost", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("API.Models.Domain.BlogPost", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Author")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Author")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Content")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FeaturedImageUrl")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("FeaturedImageUrl")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsVisble")
-                        .HasColumnType("bit");
+            b.Property<bool>("IsVisble")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("PublishedDate")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("PublishedDate")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("ShortDescription")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ShortDescription")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Title")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UrlHandle")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("UrlHandle")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("BlogPosts");
-                });
+            b.ToTable("BlogPosts");
+          });
 
-            modelBuilder.Entity("API.Models.Domain.Category", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("API.Models.Domain.Category", b =>
+          {
+            b.Property<Guid>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Name")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Urlhandle")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("UrlHandle")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Categories");
-                });
+            b.ToTable("Categories");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }

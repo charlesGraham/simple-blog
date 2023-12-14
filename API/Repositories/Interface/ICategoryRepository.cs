@@ -9,5 +9,7 @@ namespace API.Repositories.Interface
     Task<IEnumerable<Category>> GetAllAsync();
 
     Task<Category?> GetById(Guid id);
+
+    Task<Category?> UpdateAsync(Category category);
   }
 }
