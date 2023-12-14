@@ -1,6 +1,7 @@
 using API.Models.Domain;
 using API.Models.DTO;
 using API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -37,6 +38,29 @@ namespace API.Controllers
       };
 
       return Ok(response);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllCategories()
+    {
+      // API call
+      var categories = await _categoryRepository.GetAllAsync();
+
+      // domain model to DTO
+      var response = new List<CategoryDto>();
+
+      foreach (var category in categories)
+      {
+        response.Add(new CategoryDto
+        {
+          Id = category.Id,
+          Name = category.Name,
+          UrlHandle = category.Urlhandle
+        });
+      }
+
+      return Ok(response);
+
     }
   }
 }
