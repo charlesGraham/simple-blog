@@ -24,5 +24,10 @@ namespace API.Repositories.Implementation
     {
       return await _dbContext.Categories.ToListAsync();
     }
+
+    public async Task<Category?> GetById(Guid id)
+    {
+      return await _dbContext.Categories.FirstOrDefaultAsync(category => category.Id == id);
+    }
   }
 }

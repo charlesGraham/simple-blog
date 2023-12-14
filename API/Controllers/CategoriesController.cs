@@ -1,5 +1,6 @@
 using API.Models.Domain;
 using API.Models.DTO;
+using API.Repositories.Implementation;
 using API.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -60,6 +61,28 @@ namespace API.Controllers
 
       return Ok(response);
 
+    }
+
+    [HttpGet]
+    [Route("{id:Guid}")]
+    public async Task<IActionResult> GetCategoryById(Guid id)
+    {
+      var existingCategory = await _categoryRepository.GetById(id);
+
+      if (existingCategory is null)
+      {
+        return NotFound();
+      }
+
+      // domain model to DTO
+      var response = new CategoryDto
+      {
+        Id = existingCategory.Id,
+        Name = existingCategory.Name,
+        UrlHandle = existingCategory.Urlhandle
+      };
+
+      return Ok(response);
     }
   }
 }
