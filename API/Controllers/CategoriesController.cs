@@ -1,7 +1,6 @@
-using API.Data;
 using API.Models.Domain;
 using API.Models.DTO;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
+using API.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -10,12 +9,11 @@ namespace API.Controllers
   [Route("api/[controller]")]
   public class CategoriesController : ControllerBase
   {
-    private readonly ApplicationDbContext _dbContext;
+    private readonly ICategoryRepository _categoryRepository;
 
-    public CategoriesController(ApplicationDbContext dbContext)
+    public CategoriesController(ICategoryRepository categoryRepository)
     {
-      this._dbContext = dbContext;
-
+      this._categoryRepository = categoryRepository;
     }
 
     [HttpPost]
@@ -28,8 +26,7 @@ namespace API.Controllers
         Urlhandle = request.Urlhandle
       };
 
-      await _dbContext.Categories.AddAsync(category);
-      await _dbContext.SaveChangesAsync();
+      await _categoryRepository.CreateAsync(category);
 
       // domain model to DTO
       var response = new CategoryDto

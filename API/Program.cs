@@ -1,4 +1,6 @@
 using API.Data;
+using API.Repositories.Implementation;
+using API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,20 +12,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// add DbContext
-// builder.Services.AddEntityFrameworkNpgsql()
-//   .AddDbContext<ApplicationDbContext>(options =>
-//   {
-//     options.UseNpgsql(builder.Configuration.GetConnectionString("SimpleBlogConnectionString"));
-//   });
 
-// mssql
+// add DbContext // mssql
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
   options.UseSqlServer(builder.Configuration.GetConnectionString("SimpleBlogConnectionString"));
 });
 
-
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
 var app = builder.Build();
 
