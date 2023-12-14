@@ -22,7 +22,7 @@ export class AddCategoryComponent {
     this.categoryService.addCategory(this.model)
       .subscribe({
         next: (response) => {
-          console.log('Success!');
+          console.log('Success! Category added.');
         }
       })
   }
