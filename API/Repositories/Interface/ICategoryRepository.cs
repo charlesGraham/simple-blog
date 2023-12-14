@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using API.Models.Domain;
 
 namespace API.Repositories.Interface
@@ -11,5 +12,7 @@ namespace API.Repositories.Interface
     Task<Category?> GetById(Guid id);
 
     Task<Category?> UpdateAsync(Category category);
+
+    Task<Category?> DeleteAsync(Guid id);
   }
 }
