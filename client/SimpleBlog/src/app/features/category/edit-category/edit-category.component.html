@@ -22,8 +22,9 @@
             [(ngModel)]="category.urlHandle">
         </div>
 
-        <div class="mt-3">
+        <div class="d-flex mt-3">
           <button class="btn btn-primary" type="submit">Save</button>
+          <button class="btn btn-danger ms-3" type="button" (click)="handleDelete()">Delete</button>
         </div>
       </div>
     </form>

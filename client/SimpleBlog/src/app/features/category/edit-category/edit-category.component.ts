@@ -30,10 +30,21 @@ export class EditCategoryComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.updateCategorySubscription = this.categoryService.updateCategory(this.id, updateCategoryRequest)
         .subscribe({
-          next: (response) => {
+          next: () => {
             this.router.navigateByUrl('/admin/categories');
           }
         });
+    }
+  }
+
+  handleDelete(): void {
+    if (this.id) {
+      this.categoryService.deleteCategory(this.id)
+        .subscribe({
+          next: () => {
+            this.router.navigateByUrl('/admin/categories');
+          }
+        })
     }
   }
 
