@@ -1,7 +1,6 @@
 using API.Data;
 using API.Models.Domain;
 using API.Repositories.Interface;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementation

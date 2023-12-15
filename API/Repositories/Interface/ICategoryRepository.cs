@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using API.Models.Domain;
 
 namespace API.Repositories.Interface
