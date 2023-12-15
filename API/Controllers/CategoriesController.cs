@@ -1,8 +1,6 @@
 using API.Models.Domain;
 using API.Models.DTO;
-using API.Repositories.Implementation;
 using API.Repositories.Interface;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
