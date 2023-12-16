@@ -48,7 +48,34 @@ namespace API.Controllers
       };
 
       return Ok(response);
+    }
 
+    [HttpGet]
+    public async Task<IActionResult> GetAllBlogPosts()
+    {
+
+      // API call
+      var blogPosts = await _blogPostRepository.GetAllAsync();
+
+      // domain model to DTO
+      var response = new List<BlogPostDto>();
+
+      foreach (var blogPost in blogPosts)
+      {
+        response.Add(new BlogPostDto
+        {
+          Title = blogPost.Title,
+          ShortDescription = blogPost.ShortDescription,
+          Content = blogPost.Content,
+          FeaturedImageUrl = blogPost.FeaturedImageUrl,
+          UrlHandle = blogPost.UrlHandle,
+          PublishedDate = blogPost.PublishedDate,
+          Author = blogPost.Author,
+          IsVisble = blogPost.IsVisble
+        });
+      }
+
+      return Ok(response);
     }
   }
 }
