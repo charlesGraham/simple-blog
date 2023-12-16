@@ -49,6 +49,7 @@ namespace API.Controllers
       // domain model to DTO
       var response = new BlogPostDto
       {
+        Id = blogPost.Id,
         Title = blogPost.Title,
         ShortDescription = blogPost.ShortDescription,
         Content = blogPost.Content,
@@ -82,6 +83,7 @@ namespace API.Controllers
       {
         response.Add(new BlogPostDto
         {
+          Id = blogPost.Id,
           Title = blogPost.Title,
           ShortDescription = blogPost.ShortDescription,
           Content = blogPost.Content,
