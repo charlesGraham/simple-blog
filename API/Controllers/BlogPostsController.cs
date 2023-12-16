@@ -10,10 +10,12 @@ namespace API.Controllers
   public class BlogPostsController : ControllerBase
   {
     private readonly IBlogPostRepository _blogPostRepository;
+    private readonly ICategoryRepository _categoryRepository;
 
-    public BlogPostsController(IBlogPostRepository blogPostRepository)
+    public BlogPostsController(IBlogPostRepository blogPostRepository, ICategoryRepository categoryRepository)
     {
       this._blogPostRepository = blogPostRepository;
+      this._categoryRepository = categoryRepository;
     }
 
     [HttpPost]
@@ -29,10 +31,20 @@ namespace API.Controllers
         UrlHandle = request.UrlHandle,
         PublishedDate = request.PublishedDate,
         Author = request.Author,
-        IsVisble = request.IsVisble
+        IsVisble = request.IsVisble,
+        Categories = new List<Category>()
       };
 
-      await _blogPostRepository.CreateAsync(blogPost);
+      foreach (var categoryGuid in request.Categories)
+      {
+        var existingCategory = await _categoryRepository.GetById(categoryGuid);
+        if (existingCategory is not null)
+        {
+          blogPost.Categories.Add(existingCategory);
+        }
+      }
+
+      blogPost = await _blogPostRepository.CreateAsync(blogPost);
 
       // domain model to DTO
       var response = new BlogPostDto
@@ -44,7 +56,13 @@ namespace API.Controllers
         UrlHandle = blogPost.UrlHandle,
         PublishedDate = blogPost.PublishedDate,
         Author = blogPost.Author,
-        IsVisble = blogPost.IsVisble
+        IsVisble = blogPost.IsVisble,
+        Categories = blogPost.Categories.Select(dto => new CategoryDto
+        {
+          Id = dto.Id,
+          Name = dto.Name,
+          UrlHandle = dto.UrlHandle
+        }).ToList()
       };
 
       return Ok(response);
