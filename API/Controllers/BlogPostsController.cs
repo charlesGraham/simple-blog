@@ -31,7 +31,7 @@ namespace API.Controllers
         UrlHandle = request.UrlHandle,
         PublishedDate = request.PublishedDate,
         Author = request.Author,
-        IsVisble = request.IsVisble,
+        IsVisible = request.IsVisible,
         Categories = new List<Category>()
       };
 
@@ -57,7 +57,7 @@ namespace API.Controllers
         UrlHandle = blogPost.UrlHandle,
         PublishedDate = blogPost.PublishedDate,
         Author = blogPost.Author,
-        IsVisble = blogPost.IsVisble,
+        IsVisible = blogPost.IsVisible,
         Categories = blogPost.Categories.Select(dto => new CategoryDto
         {
           Id = dto.Id,
@@ -91,7 +91,7 @@ namespace API.Controllers
           UrlHandle = blogPost.UrlHandle,
           PublishedDate = blogPost.PublishedDate,
           Author = blogPost.Author,
-          IsVisble = blogPost.IsVisble
+          IsVisible = blogPost.IsVisible
         });
       }
 

@@ -10,7 +10,7 @@ namespace API.Models.DTO
     public string? UrlHandle { get; set; } = string.Empty;
     public DateTime PublishedDate { get; set; }
     public string? Author { get; set; } = string.Empty;
-    public bool IsVisble { get; set; }
+    public bool IsVisible { get; set; }
     public List<CategoryDto> Categories { get; set; } = new List<CategoryDto>();
   }
 }
