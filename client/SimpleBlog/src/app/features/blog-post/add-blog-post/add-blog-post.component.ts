@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AddBlogPost } from '../models/add-blog-post.model';
+import { BlogPostService } from '../services/blog-post.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-blog-post',
@@ -10,7 +12,7 @@ export class AddBlogPostComponent {
 
   model: AddBlogPost;
 
-  constructor() {
+  constructor(private blogPostService: BlogPostService, private router: Router) {
     this.model = {
       title: '',
       shortDescription: '',
@@ -25,6 +27,11 @@ export class AddBlogPostComponent {
   }
 
   handleSubmit(): void {
-    console.log(this.model);
+    this.blogPostService.createBlogPost(this.model)
+      .subscribe({
+        next: () => {
+          this.router.navigateByUrl('/admin/blogposts');
+        }
+      });
   }
 }
