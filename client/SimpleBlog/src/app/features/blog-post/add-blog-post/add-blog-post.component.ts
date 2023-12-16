@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AddBlogPost } from '../models/add-blog-post.model';
 
 @Component({
   selector: 'app-add-blog-post',
@@ -7,5 +8,23 @@ import { Component } from '@angular/core';
 })
 export class AddBlogPostComponent {
 
-  handleSubmit() { }
+  model: AddBlogPost;
+
+  constructor() {
+    this.model = {
+      title: '',
+      shortDescription: '',
+      content: '',
+      featuredImageUrl: '',
+      urlHandle: '',
+      publishedDate: new Date(),
+      author: '',
+      isVisible: true
+    }
+
+  }
+
+  handleSubmit(): void {
+    console.log(this.model);
+  }
 }
