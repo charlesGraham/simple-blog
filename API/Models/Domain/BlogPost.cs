@@ -11,6 +11,6 @@ namespace API.Models.Domain
     public DateTime PublishedDate { get; set; }
     public string? Author { get; set; } = string.Empty;
     public bool IsVisble { get; set; }
-    public ICollection<Category> Categories { get; set; }
+    public ICollection<Category>? Categories { get; set; }
   }
 }
