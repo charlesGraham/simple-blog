@@ -91,7 +91,13 @@ namespace API.Controllers
           UrlHandle = blogPost.UrlHandle,
           PublishedDate = blogPost.PublishedDate,
           Author = blogPost.Author,
-          IsVisible = blogPost.IsVisible
+          IsVisible = blogPost.IsVisible,
+          Categories = blogPost.Categories.Select(dto => new CategoryDto
+          {
+            Id = dto.Id,
+            Name = dto.Name,
+            UrlHandle = dto.UrlHandle
+          }).ToList()
         });
       }
 
