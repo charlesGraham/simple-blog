@@ -12,11 +12,14 @@ import { Subscription } from 'rxjs';
 export class EditBlogPostComponent implements OnInit, OnDestroy {
 
   id: string | null = null;
+  model?: BlogPost;
   paramsSubscription?: Subscription;
-  blogPost?: BlogPost;
+  // blogPost?: BlogPost;
   updateBlogPostSubscription?: Subscription;
 
   constructor(private route: ActivatedRoute, private blogPostService: BlogPostService) { }
+
+  handleSubmit(): void { }
 
   ngOnInit(): void {
     this.paramsSubscription = this.route.paramMap.subscribe({
@@ -27,7 +30,8 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
           this.blogPostService.getBlogPostById(this.id)
             .subscribe({
               next: (response) => {
-                this.blogPost = response;
+                this.model = response;
+                console.log(this.model);
               }
             });
         }
