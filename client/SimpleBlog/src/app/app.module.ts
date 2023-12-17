@@ -12,6 +12,7 @@ import { EditCategoryComponent } from './features/category/edit-category/edit-ca
 import { BlogPostListComponent } from './features/blog-post/blog-post-list/blog-post-list.component';
 import { AddBlogPostComponent } from './features/blog-post/add-blog-post/add-blog-post.component';
 import { MarkdownModule } from 'ngx-markdown';
+import { EditBlogPostComponent } from './features/blog-post/edit-blog-post/edit-blog-post.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { MarkdownModule } from 'ngx-markdown';
     AddCategoryComponent,
     EditCategoryComponent,
     BlogPostListComponent,
-    AddBlogPostComponent
+    AddBlogPostComponent,
+    EditBlogPostComponent
   ],
   imports: [
     BrowserModule,
