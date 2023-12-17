@@ -22,6 +22,7 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
   getBlogPostSubscription?: Subscription;
   deleteBlogPostSubscription?: Subscription;
   updateBlogPostSubscription?: Subscription;
+  isImageSelectorVisible: boolean = false;
 
   constructor(private route: ActivatedRoute,
     private blogPostService: BlogPostService,
@@ -83,7 +84,9 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
     }
   }
 
-
+  toggleImageSelector(): void {
+    this.isImageSelectorVisible = !this.isImageSelectorVisible;
+  }
 
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
