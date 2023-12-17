@@ -82,17 +82,17 @@
         </label>
       </div>
 
-      <!-- <div class="form-check mt-3">
-      <label class="form-label" for="categories">
-        Categories
-      </label>
+      <div class="form-check mt-3">
+        <label class="form-label" for="categories">
+          Categories
+        </label>
 
-      <ng-container *ngIf="categories$ | async as categories">
-        <select class="form-control" name="categories" [(ngModel)]="model.categories" multiple>
-          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
-        </select>
-      </ng-container>
-    </div> -->
+        <ng-container *ngIf="categories$ | async as categories">
+          <select class="form-control" name="categories" [(ngModel)]="selectedCategories" multiple>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          </select>
+        </ng-container>
+      </div>
 
       <div class="mt-3">
         <button type="submit" class="btn btn-primary">
