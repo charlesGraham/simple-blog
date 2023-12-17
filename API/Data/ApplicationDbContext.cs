@@ -9,5 +9,6 @@ namespace API.Data
 
     public virtual DbSet<BlogPost> BlogPosts { get; set; }
     public virtual DbSet<Category> Categories { get; set; }
+    public virtual DbSet<BlogImage> BlogImages { get; set; }
   }
 }
