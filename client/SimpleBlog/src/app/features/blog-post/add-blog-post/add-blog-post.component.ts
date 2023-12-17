@@ -26,7 +26,8 @@ export class AddBlogPostComponent implements OnInit {
       urlHandle: '',
       publishedDate: new Date(),
       author: '',
-      isVisible: true
+      isVisible: true,
+      categories: []
     }
 
   }
@@ -35,6 +36,7 @@ export class AddBlogPostComponent implements OnInit {
   }
 
   handleSubmit(): void {
+    console.log(this.model);
     this.blogPostService.createBlogPost(this.model)
       .subscribe({
         next: () => {
