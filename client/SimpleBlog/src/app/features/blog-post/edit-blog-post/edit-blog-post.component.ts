@@ -43,16 +43,26 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
 
       this.updateBlogPostSubscription = this.blogPostService.updateBlogPost(this.id, updatedBlogPost)
         .subscribe({
-          next: (response) => {
+          next: () => {
             this.router.navigateByUrl('/admin/blogposts');
           }
         });
     }
   }
 
+  handleDelete(id: string): void {
+    if (this.id) {
+      this.blogPostService.deleteBlogPost(id)
+        .subscribe({
+          next: () => {
+            this.router.navigateByUrl('/admin/blogposts');
+          }
+        })
+    }
+  }
+
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAllCategories();
-    this.categories$.forEach(category => console.log(category));
 
 
     this.paramsSubscription = this.route.paramMap.subscribe({
@@ -65,7 +75,6 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
               next: (response) => {
                 this.model = response;
                 this.selectedCategories = response.categories.map(category => category.id);
-                console.log(this.selectedCategories);
               }
             });
         }
