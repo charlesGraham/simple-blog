@@ -27,6 +27,27 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
     private categoryService: CategoryService,
     private router: Router) { }
 
+  ngOnInit(): void {
+    this.categories$ = this.categoryService.getAllCategories();
+
+
+    this.paramsSubscription = this.route.paramMap.subscribe({
+      next: (params) => {
+        this.id = params.get('id');
+
+        if (this.id) {
+          this.getBlogPostSubscription = this.blogPostService.getBlogPostById(this.id)
+            .subscribe({
+              next: (response) => {
+                this.model = response;
+                this.selectedCategories = response.categories.map(category => category.id);
+              }
+            });
+        }
+      }
+    });
+  }
+
   handleSubmit(): void {
     if (this.model && this.id) {
       let updatedBlogPost: UpdateBogPost = {
@@ -61,26 +82,7 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    this.categories$ = this.categoryService.getAllCategories();
 
-
-    this.paramsSubscription = this.route.paramMap.subscribe({
-      next: (params) => {
-        this.id = params.get('id');
-
-        if (this.id) {
-          this.getBlogPostSubscription = this.blogPostService.getBlogPostById(this.id)
-            .subscribe({
-              next: (response) => {
-                this.model = response;
-                this.selectedCategories = response.categories.map(category => category.id);
-              }
-            });
-        }
-      }
-    });
-  }
 
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
