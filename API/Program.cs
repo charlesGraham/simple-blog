@@ -2,10 +2,12 @@ using API.Data;
 using API.Repositories.Implementation;
 using API.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -43,6 +45,12 @@ app.UseCors(options =>
 });
 
 app.UseAuthorization();
+
+app.UseStaticFiles(new StaticFileOptions
+{
+  FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Images")),
+  RequestPath = "/Images"
+});
 
 app.MapControllers();
 
