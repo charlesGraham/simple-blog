@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ImageService } from './image.service';
 import { Observable, Subscription } from 'rxjs';
 import { BlogImage } from '../../models/blog-image.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-image-selector',
@@ -13,6 +14,8 @@ export class ImageSelectorComponent implements OnInit {
   fileName: string = '';
   title: string = '';
   images$?: Observable<BlogImage[]>;
+
+  @ViewChild('form', { static: false }) imageUploadForm?: NgForm;
 
 
   constructor(private imageService: ImageService) { }
@@ -32,7 +35,7 @@ export class ImageSelectorComponent implements OnInit {
         .subscribe({
           next: (response) => {
             this.getImages();
-            // this.imageUploadForm?.resetForm();
+            this.imageUploadForm?.resetForm();
           }
         });
     }
