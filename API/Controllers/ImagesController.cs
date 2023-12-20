@@ -2,7 +2,6 @@ using API.Models.Domain;
 using API.Models.DTO;
 using API.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace API.Controllers
 {
@@ -26,8 +25,8 @@ namespace API.Controllers
       {
         var blogImage = new BlogImage
         {
-          FileName = fileName,
           FileExtension = Path.GetExtension(file.FileName).ToLower(),
+          FileName = fileName,
           Title = title,
           DateCreated = DateTime.Now
         };
