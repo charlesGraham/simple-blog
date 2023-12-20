@@ -1,6 +1,7 @@
 using API.Data;
 using API.Models.Domain;
 using API.Repositories.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Repositories.Implementation
 {
@@ -19,6 +20,12 @@ namespace API.Repositories.Implementation
       this._httpContextAccessor = httpContextAccessor;
       this._dbContext = dbContext;
     }
+
+    public async Task<IEnumerable<BlogImage>> GetAll()
+    {
+      return await _dbContext.BlogImages.ToListAsync();
+    }
+
     public async Task<BlogImage> Upload(IFormFile file, BlogImage blogImage)
     {
       // upload image

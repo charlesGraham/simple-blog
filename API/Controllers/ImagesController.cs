@@ -1,5 +1,6 @@
 using API.Models.Domain;
 using API.Models.DTO;
+using API.Repositories.Implementation;
 using API.Repositories.Interface;
 using Microsoft.AspNetCore.Mvc;
 
@@ -49,6 +50,29 @@ namespace API.Controllers
       }
 
       return BadRequest(ModelState);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllImages()
+    {
+      var images = await _imageRepository.GetAll();
+
+      // domain model to DTO
+      var response = new List<BlogImageDto>();
+      foreach (var image in images)
+      {
+        response.Add(new BlogImageDto
+        {
+          Id = image.Id,
+          Title = image.Title,
+          DateCreated = image.DateCreated,
+          FileExtension = image.FileExtension,
+          FileName = image.FileName,
+          Url = image.Url
+        });
+      }
+
+      return Ok(response);
     }
 
     private void ValidateFileUpload(IFormFile file)
