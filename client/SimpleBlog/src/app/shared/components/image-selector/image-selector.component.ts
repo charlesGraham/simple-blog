@@ -1,17 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ImageService } from './image.service';
+import { Observable, Subscription } from 'rxjs';
+import { BlogImage } from '../../models/blog-image.model';
 
 @Component({
   selector: 'app-image-selector',
   templateUrl: './image-selector.component.html',
   styleUrls: ['./image-selector.component.css']
 })
-export class ImageSelectorComponent {
+export class ImageSelectorComponent implements OnInit, OnDestroy {
   private file?: File;
   fileName: string = '';
   title: string = '';
+  images$?: Observable<BlogImage[]>;
+
+  imageServiceSubscription?: Subscription;
 
   constructor(private imageService: ImageService) { }
+
+  ngOnInit(): void {
+    this.getImages();
+  }
+
+  ngOnDestroy(): void {
+    if (this.imageServiceSubscription) {
+      this.imageServiceSubscription.unsubscribe();
+    }
+
+  }
 
   handleFileUploadChange(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
@@ -23,12 +39,16 @@ export class ImageSelectorComponent {
       this.imageService.uploadImage(this.file, this.fileName, this.title)
         .subscribe({
           next: (response) => {
-            console.log(response);
+            this.getImages();
             // this.imageUploadForm?.resetForm();
-            // this.getImages();+
           }
         });
     }
+  }
+
+  private getImages() {
+    this.images$ = this.imageService.getAllImages();
+
   }
 
 }

@@ -19,4 +19,8 @@ export class ImageService {
 
     return this.http.post<BlogImage>(`${environment.apiBaseUrl}/api/images`, formData);
   }
+
+  getAllImages(): Observable<BlogImage[]> {
+    return this.http.get<BlogImage[]>(`${environment.apiBaseUrl}/api/images`);
+  }
 }
