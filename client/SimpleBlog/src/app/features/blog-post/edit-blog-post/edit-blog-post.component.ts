@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { CategoryService } from '../../category/services/category.service';
 import { Category } from '../../category/models/category.model';
 import { UpdateBogPost } from '../models/update-blog-post.model';
+import { ImageService } from 'src/app/shared/components/image-selector/image.service';
 
 @Component({
   selector: 'app-edit-blog-post',
@@ -20,6 +21,7 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
   selectedCategories?: string[];
   paramsSubscription?: Subscription;
   getBlogPostSubscription?: Subscription;
+  imageSelectSubscription?: Subscription;
   deleteBlogPostSubscription?: Subscription;
   updateBlogPostSubscription?: Subscription;
   isImageSelectorVisible: boolean = false;
@@ -27,11 +29,11 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
     private blogPostService: BlogPostService,
     private categoryService: CategoryService,
-    private router: Router) { }
+    private router: Router,
+    private imageService: ImageService) { }
 
   ngOnInit(): void {
     this.categories$ = this.categoryService.getAllCategories();
-
 
     this.paramsSubscription = this.route.paramMap.subscribe({
       next: (params) => {
@@ -46,6 +48,16 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
               }
             });
         }
+
+        this.imageSelectSubscription = this.imageService.onSelectImage()
+          .subscribe({
+            next: (response) => {
+              if (this.model) {
+                this.model.featuredImageUrl = response.url;
+                this.isImageSelectorVisible = false;
+              }
+            }
+          });
       }
     });
   }
@@ -91,6 +103,7 @@ export class EditBlogPostComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paramsSubscription?.unsubscribe();
     this.getBlogPostSubscription?.unsubscribe();
+    this.imageSelectSubscription?.unsubscribe();
     this.deleteBlogPostSubscription?.unsubscribe();
     this.updateBlogPostSubscription?.unsubscribe();
   }
