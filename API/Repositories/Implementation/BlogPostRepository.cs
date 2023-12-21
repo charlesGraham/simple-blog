@@ -51,8 +51,7 @@ namespace API.Repositories.Implementation
 
     public async Task<BlogPost?> UpdateAsync(BlogPost blogPost)
     {
-      var existingBlogPost = await _dbContext.BlogPosts.Include(x => x.Categories)
-          .FirstOrDefaultAsync(x => x.Id == blogPost.Id);
+      var existingBlogPost = await _dbContext.BlogPosts.Include(x => x.Categories).FirstOrDefaultAsync(x => x.Id == blogPost.Id);
 
       if (existingBlogPost == null)
       {

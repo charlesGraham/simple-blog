@@ -140,33 +140,34 @@ namespace API.Controllers
     }
 
     [HttpGet]
-    [Route("{url}")]
-    public async Task<IActionResult> GetBlogPostByUrlHandle(string urlHandle)
+    [Route("{urlHandle}")]
+    public async Task<IActionResult> GetBlogPostByUrlHandle([FromRoute] string urlHandle)
     {
-      var existingBlogPost = await _blogPostRepository.GetByUrlHandleAsync(urlHandle);
+      // Get blogpost details from repository
+      var blogPost = await _blogPostRepository.GetByUrlHandleAsync(urlHandle);
 
-      if (existingBlogPost is null)
+      if (blogPost is null)
       {
         return NotFound();
       }
 
-      // domain model to DTO
+      // domain to DTO
       var response = new BlogPostDto
       {
-        Id = existingBlogPost.Id,
-        Title = existingBlogPost.Title,
-        ShortDescription = existingBlogPost.ShortDescription,
-        Content = existingBlogPost.Content,
-        FeaturedImageUrl = existingBlogPost.FeaturedImageUrl,
-        UrlHandle = existingBlogPost.UrlHandle,
-        PublishedDate = existingBlogPost.PublishedDate,
-        Author = existingBlogPost.Author,
-        IsVisible = existingBlogPost.IsVisible,
-        Categories = existingBlogPost.Categories.Select(dto => new CategoryDto
+        Id = blogPost.Id,
+        Author = blogPost.Author,
+        Content = blogPost.Content,
+        FeaturedImageUrl = blogPost.FeaturedImageUrl,
+        IsVisible = blogPost.IsVisible,
+        PublishedDate = blogPost.PublishedDate,
+        ShortDescription = blogPost.ShortDescription,
+        Title = blogPost.Title,
+        UrlHandle = blogPost.UrlHandle,
+        Categories = blogPost.Categories.Select(x => new CategoryDto
         {
-          Id = dto.Id,
-          Name = dto.Name,
-          UrlHandle = dto.UrlHandle
+          Id = x.Id,
+          Name = x.Name,
+          UrlHandle = x.UrlHandle
         }).ToList()
       };
 
