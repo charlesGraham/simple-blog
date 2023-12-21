@@ -1,6 +1,7 @@
 using API.Models.Domain;
 using API.Models.DTO;
 using API.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -40,6 +41,7 @@ namespace API.Controllers
     }
 
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAllCategories()
     {
       // API call
