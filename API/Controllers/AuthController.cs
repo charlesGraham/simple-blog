@@ -1,4 +1,6 @@
 using API.Models.DTO;
+using API.Repositories.Implementation;
+using API.Repositories.Interface;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +11,15 @@ namespace API.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly ITokenRepository _tokenRepository;
 
-        public AuthController(UserManager<IdentityUser> userManager)
+        public AuthController(
+            UserManager<IdentityUser> userManager,
+            ITokenRepository tokenRepository
+        )
         {
             this._userManager = userManager;
+            this._tokenRepository = tokenRepository;
         }
 
         [HttpPost]
@@ -33,11 +40,13 @@ namespace API.Controllers
                     var roles = await _userManager.GetRolesAsync(identityUser);
 
                     // create token + response
+                    var jwtToken = _tokenRepository.CreateJwtToken(identityUser, roles.ToList());
+
                     var response = new LoginResponseDto()
                     {
                         Email = request.Email,
                         Roles = roles.ToList(),
-                        Token = "TOKEN"
+                        Token = jwtToken
                     };
 
                     return Ok(response);
