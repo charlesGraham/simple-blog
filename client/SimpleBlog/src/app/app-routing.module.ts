@@ -8,6 +8,7 @@ import { AddBlogPostComponent } from './features/blog-post/add-blog-post/add-blo
 import { EditBlogPostComponent } from './features/blog-post/edit-blog-post/edit-blog-post.component';
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
+import { LoginComponent } from './features/auth/login/login.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -17,7 +18,9 @@ const routes: Routes = [
   { path: 'admin/blogposts', component: BlogPostListComponent },
   { path: 'admin/blogposts/add', component: AddBlogPostComponent },
   { path: 'admin/blogposts/:id', component: EditBlogPostComponent },
-  { path: 'blog/:url', component: BlogDetailsComponent }
+  { path: 'blog/:url', component: BlogDetailsComponent },
+  { path: 'login', component: LoginComponent }
+
 ];
 
 @NgModule({

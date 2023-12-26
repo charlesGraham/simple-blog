@@ -16,6 +16,7 @@ import { EditBlogPostComponent } from './features/blog-post/edit-blog-post/edit-
 import { ImageSelectorComponent } from './shared/components/image-selector/image-selector.component';
 import { HomeComponent } from './features/public/home/home.component';
 import { BlogDetailsComponent } from './features/public/blog-details/blog-details.component';
+import { LoginComponent } from './features/auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { BlogDetailsComponent } from './features/public/blog-details/blog-detail
     EditBlogPostComponent,
     ImageSelectorComponent,
     HomeComponent,
-    BlogDetailsComponent
+    BlogDetailsComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
