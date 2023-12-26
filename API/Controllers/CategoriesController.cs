@@ -18,6 +18,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateCategory(CreateCategoryRequestDto request)
         {
             // map DTO to domain model
@@ -37,7 +38,6 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> GetAllCategories()
         {
             // API call
@@ -85,6 +85,7 @@ namespace API.Controllers
 
         [HttpPut]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateCategory(Guid id, UpdateCategoryRequestDto request)
         {
             // DTO to domain model
@@ -115,6 +116,7 @@ namespace API.Controllers
 
         [HttpDelete]
         [Route("{id:Guid}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteCategory(Guid id)
         {
             var category = await _categoryRepository.DeleteAsync(id);
