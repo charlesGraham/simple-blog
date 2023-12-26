@@ -24,7 +24,19 @@
         </li>
       </ul>
       <div class="d-flex">
-        <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
+        <ng-container *ngIf="user === undefined;else showLogout">
+          <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
+        </ng-container>
+
+        <ng-template #showLogout>
+          <div class="d-flex align-items-center">
+            <span>
+              {{ user?.email }}
+            </span>
+          </div>
+          <button class="btn btn-primary ms-3" (click)="handleLogout()">Logout</button>
+        </ng-template>
+
       </div>
     </div>
   </div>
