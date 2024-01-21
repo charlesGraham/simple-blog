@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/simple-blog",
+            "outputPath": "../../API/ClientApp/simple-blog",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
