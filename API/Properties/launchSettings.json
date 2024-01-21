@@ -36,6 +36,16 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "AngularApp": {
+      "commandName": "Executable",
+      "executablePath": "npm",
+      "commandLineArgs": "run start -o",
+      "workingDirectory": "../../SimpleBlog/client/SimpleBlog",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
     }
   }
 }

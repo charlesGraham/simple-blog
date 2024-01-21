@@ -19,3 +19,5 @@ describe('NavbarComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+
+// Testing to see if there's a difference
